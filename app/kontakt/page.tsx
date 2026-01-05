@@ -14,7 +14,7 @@ export default function KontaktPage() {
       <h1 className="text-3xl font-semibold tracking-tight">Kontakt</h1>
       <p className="mt-2 text-fg/70 max-w-2xl">
         Skicka ett meddelande så återkommer vi. Ju mer kontext du ger, desto
-        snabbare kan vi hjälpa <i class="fa fa-digg" aria-hidden="true"></i>.
+        snabbare kan vi hjälpa dig.
       </p>
 
       <div className="mt-10 max-w-xl">
