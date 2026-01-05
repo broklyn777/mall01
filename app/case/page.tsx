@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+// app/case/page.tsx
 import Link from "next/link";
 import Image from "next/image";
+
+import { makeMetadata } from "@/lib/seo";
 import { cases } from "@/content/cases";
 import {
   Card,
@@ -10,45 +12,23 @@ import {
   CardContent,
 } from "@/components/ui/card";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://media3d.vercel.app";
-
-export function generateMetadata(): Metadata {
-  const title = "Case – tekniska översikter & projekt";
-  const description =
-    "Projekt och exempel på hur Media3d bygger struktur, design och teknik i praktiken.";
-
-  const pageUrl = `${SITE_URL}/case`;
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: pageUrl,
-    },
-    openGraph: {
-      title: `${title} | Media3d`,
-      description,
-      url: pageUrl,
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${title} | Media3d`,
-      description,
-    },
-  };
-}
+export const metadata = makeMetadata({
+  title: "Case – tekniska översikter & projekt",
+  description:
+    "Projekt och exempel på hur Media3d bygger struktur, design och teknik i praktiken.",
+  path: "/case",
+});
 
 export default function CasePage() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-14">
-      <h1 className="text-3xl font-semibold tracking-tight">Case</h1>
-      <p className="mt-2 max-w-2xl text-fg/70">
-        Projekt och experiment som visar hur vi jobbar med struktur, design och
-        SEO.
-      </p>
+    <main className="mx-auto max-w-6xl px-6 py-14">
+      <header>
+        <h1 className="text-3xl font-semibold tracking-tight">Case</h1>
+        <p className="mt-2 max-w-2xl text-fg/70">
+          Projekt och experiment som visar hur vi jobbar med struktur, design
+          och SEO.
+        </p>
+      </header>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {cases.map((c) => (
@@ -79,14 +59,16 @@ export default function CasePage() {
               <p className="text-sm text-fg/75 line-clamp-3">{c.excerpt}</p>
 
               <div className="mt-auto flex flex-wrap gap-3 pt-2">
-                <a
-                  href={c.externalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-90"
-                >
-                  Besök sajten →
-                </a>
+                {c.externalUrl ? (
+                  <a
+                    href={c.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+                  >
+                    Besök sajten →
+                  </a>
+                ) : null}
 
                 <Link
                   href={`/case/${c.slug}`}
@@ -99,6 +81,6 @@ export default function CasePage() {
           </Card>
         ))}
       </div>
-    </div>
+    </main>
   );
 }

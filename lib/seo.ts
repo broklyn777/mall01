@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { site } from "./site";
 
 type SeoInput = {
-  title?: string; // "Case"
+  title?: string; // "Kontakt"
   description?: string; // page description
-  path?: string; // "/case/slug"
+  path?: string; // "/kontakt"
   image?: string; // "/og.jpg"
   noIndex?: boolean;
 };
@@ -14,17 +14,16 @@ export function makeMetadata(input: SeoInput = {}): Metadata {
   const titleText = input.title ?? site.title;
   const description = input.description ?? site.description;
 
-  // Behåll din template-beteende: "%s | Media3d"
-  const title: Metadata["title"] = input.title
-    ? `${input.title} | ${site.name}`
-    : {
-        default: site.title,
-        template: `%s | ${site.name}`,
-      };
+  // VIKTIGT:
+  // - Layouten äger template: "%s | Media3d"
+  // - makeMetadata får INTE bygga "Kontakt | Media3d"
+  // - Om ingen input.title: lämna title undefined så layoutens default gäller
+  const title: Metadata["title"] = input.title ? input.title : undefined;
 
   const canonical = input.path
     ? new URL(input.path, site.url)
     : new URL(site.url);
+
   const imagePath = input.image ?? site.ogImage;
   const imageUrl = new URL(imagePath, site.url);
 

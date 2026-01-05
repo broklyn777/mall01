@@ -1,4 +1,7 @@
+// app/fargsystem/page.tsx
 import Link from "next/link";
+
+import { makeMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,15 +11,24 @@ import {
   CardContent,
 } from "@/components/ui/card";
 
+export const metadata = makeMetadata({
+  title: "Färgsystem",
+  description: "Tokens, opacity och exempel på användning (Alt A).",
+  path: "/fargsystem",
+  noIndex: true, // styleguide/demo: sätt false om du vill indexera
+});
+
 export default function FargsystemPage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-14">
-      <h1 className="text-3xl font-semibold tracking-tight">Färgsystem</h1>
-      <p className="mt-2 text-fg/70">
-        Tokens, opacity och exempel på användning (Alt A).
-      </p>
+      <header>
+        <h1 className="text-3xl font-semibold tracking-tight">Färgsystem</h1>
+        <p className="mt-2 text-fg/70">
+          Tokens, opacity och exempel på användning (Alt A).
+        </p>
+      </header>
 
-      {/* Del 1: “Gamla startsidan” – hur färgerna används */}
+      {/* Del 1: Tokens i praktiken */}
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Tokens i praktiken</h2>
         <p className="mt-2 max-w-2xl text-fg/70">
@@ -27,10 +39,15 @@ export default function FargsystemPage() {
           highlights.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Button>Primary CTA</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="ghost">Ghost</Button>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Button type="button">Primary CTA</Button>
+          <Button type="button" variant="secondary">
+            Secondary
+          </Button>
+          <Button type="button" variant="ghost">
+            Ghost
+          </Button>
+
           <Link
             href="/"
             className="inline-flex items-center rounded-xl bg-primary/8 px-4 py-3 text-sm font-medium text-primary hover:bg-primary/12"
@@ -47,7 +64,7 @@ export default function FargsystemPage() {
             </CardHeader>
             <CardContent>
               <div className="rounded-xl border border-fg/10 bg-bg p-4">
-                <div className="text-fg font-medium">Text (fg)</div>
+                <div className="font-medium text-fg">Text (fg)</div>
                 <div className="mt-1 text-sm text-fg/70">Muted (fg/70)</div>
                 <div className="mt-3 h-2 rounded-full bg-fg/10" />
               </div>
@@ -65,7 +82,9 @@ export default function FargsystemPage() {
               <CardDescription>Knappar, länkar, fokus.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button className="w-full">Primary CTA</Button>
+              <Button type="button" className="w-full">
+                Primary CTA
+              </Button>
               <div className="rounded-xl border border-primary/20 bg-primary/10 p-4 text-primary">
                 Subtil yta (primary/10)
               </div>
@@ -97,7 +116,7 @@ export default function FargsystemPage() {
         </div>
       </section>
 
-      {/* Del 2: Din “tydliga demo” */}
+      {/* Del 2: Tydlig demo */}
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">
           Färgpalett (Alt A) – tydlig demo
@@ -110,9 +129,9 @@ export default function FargsystemPage() {
           <div className="rounded-2xl border border-fg/10 bg-bg p-6">
             <div className="text-sm font-semibold">Background (bg-bg)</div>
             <div className="mt-3 rounded-xl border border-fg/10 bg-bg p-6">
-              <div className="text-fg font-medium">Text: text-fg</div>
-              <div className="mt-1 text-fg/70 text-sm">Muted: text-fg/70</div>
-              <div className="mt-4 flex gap-2">
+              <div className="font-medium text-fg">Text: text-fg</div>
+              <div className="mt-1 text-sm text-fg/70">Muted: text-fg/70</div>
+              <div className="mt-4 flex flex-wrap gap-2">
                 <span className="rounded-full bg-fg/10 px-3 py-1 text-xs text-fg">
                   fg/10 pill
                 </span>
@@ -130,7 +149,7 @@ export default function FargsystemPage() {
             <div className="text-sm font-semibold">Foreground (fg)</div>
             <div className="mt-3 rounded-xl bg-fg p-6 text-white">
               <div className="font-medium">Text on fg (white)</div>
-              <div className="mt-1 text-white/80 text-sm">White/80</div>
+              <div className="mt-1 text-sm text-white/80">White/80</div>
             </div>
             <div className="mt-3 text-xs text-fg/70">
               rgb(31 41 51) • #1f2933
@@ -140,14 +159,14 @@ export default function FargsystemPage() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <div className="rounded-2xl border border-fg/10 bg-bg p-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <div className="text-sm font-semibold">Primary</div>
               <div className="text-xs text-fg/70">rgb(30 58 138) • #1e3a8a</div>
             </div>
 
             <div className="mt-4 rounded-xl bg-primary p-6 text-white">
               <div className="font-medium">bg-primary (100%)</div>
-              <div className="mt-1 text-white/80 text-sm">CTA / stark yta</div>
+              <div className="mt-1 text-sm text-white/80">CTA / stark yta</div>
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -167,7 +186,7 @@ export default function FargsystemPage() {
           </div>
 
           <div className="rounded-2xl border border-fg/10 bg-bg p-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <div className="text-sm font-semibold">Accent</div>
               <div className="text-xs text-fg/70">rgb(180 83 9) • #b45309</div>
             </div>
@@ -193,7 +212,7 @@ export default function FargsystemPage() {
 
             <div className="mt-4 rounded-xl bg-accent p-6 text-white">
               <div className="font-medium">bg-accent (100%)</div>
-              <div className="mt-1 text-white/85 text-sm">
+              <div className="mt-1 text-sm text-white/85">
                 Bra för små callouts (men använd sparsamt).
               </div>
             </div>
@@ -208,15 +227,24 @@ export default function FargsystemPage() {
           </p>
 
           <div className="mt-4 flex flex-wrap gap-3">
-            <a className="rounded-xl bg-primary px-5 py-3 text-white shadow-sm hover:opacity-90">
+            <button
+              type="button"
+              className="rounded-xl bg-primary px-5 py-3 text-white shadow-sm hover:opacity-90"
+            >
               Primary CTA
-            </a>
-            <a className="rounded-xl border border-fg/15 px-5 py-3 text-fg hover:bg-fg/5">
+            </button>
+            <button
+              type="button"
+              className="rounded-xl border border-fg/15 px-5 py-3 text-fg hover:bg-fg/5"
+            >
               Secondary
-            </a>
-            <a className="rounded-xl bg-accent/10 px-5 py-3 text-accent hover:bg-accent/15">
+            </button>
+            <button
+              type="button"
+              className="rounded-xl bg-accent/10 px-5 py-3 text-accent hover:bg-accent/15"
+            >
               Accent highlight
-            </a>
+            </button>
           </div>
         </div>
       </section>

@@ -1,3 +1,12 @@
+// app/om/page.tsx
+import { makeMetadata } from "@/lib/seo";
+
+export const metadata = makeMetadata({
+  title: "Om",
+  description: "Lite fakta om oss på Media3d.",
+  path: "/om",
+});
+
 export default function OmPage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-14">
